@@ -22,6 +22,7 @@ Raw data is not included in this repository. Please download it from Kaggle usin
 
 ## Project Structure
 
+```text
 kaggle-star-type-prediction/
 ├── data/
 │   ├── raw/                    # Raw Kaggle data files, ignored by Git
