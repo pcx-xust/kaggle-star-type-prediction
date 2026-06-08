@@ -216,3 +216,28 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+
+
+# Kaggle API key
+kaggle.json
+
+# Kaggle data files
+data/raw/*
+data/processed/*
+data/submissions/*
+
+# Keep directory placeholders
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/submissions/.gitkeep
+
+# Model files
+models/*
+!models/.gitkeep
+
+# Generated figures
+reports/figures/*
+!reports/figures/.gitkeep
