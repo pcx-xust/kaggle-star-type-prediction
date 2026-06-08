@@ -1,0 +1,9 @@
+### RandomForest with Color Index Features
+
+在原始特征体系基础上，本文进一步构造u_g、g_r、r_i和i_z四个颜色指数特征，并使用RandomForestClassifier重新进行分类建模。验证集结果显示，加入颜色指数特征后，RandomForest模型的Accuracy为0.959470，Balanced Accuracy为0.942999，Macro F1为0.944721。
+
+从分类别结果看，GALAXY类别的precision、recall和F1-score分别为0.969874、0.973111和0.971490；QSO类别的precision、recall和F1-score分别为0.961867、0.961415和0.961641；STAR类别的precision、recall和F1-score分别为0.907691、0.894470和0.901032。可以看出，模型对GALAXY和QSO的识别仍然较稳定，而STAR类别仍是三类中相对较难识别的一类。
+
+与颜色特征工程阶段的ExtraTrees模型相比，RandomForest在Accuracy、Balanced Accuracy和Macro F1三个指标上均取得更高结果，说明在加入颜色指数特征后，RandomForest仍然是当前阶段表现更优的模型。
+
+不过，与原始RandomForest基线模型相比，加入颜色指数后Accuracy和Macro F1略有提升，但Balanced Accuracy有所下降。这表明颜色指数特征能够带来一定整体性能增益，但对三类样本召回率均衡性的改善并不充分。因此，后续模型选择不能仅依据Accuracy判断，而应综合比较Macro F1、Balanced Accuracy以及STAR类别的识别表现。
