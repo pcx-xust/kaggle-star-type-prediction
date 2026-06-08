@@ -1,0 +1,2 @@
+﻿model,accuracy,balanced_accuracy,macro_f1
+RandomForest_baseline,0.9563696198146705,0.9536543349457071,0.9421532852532555

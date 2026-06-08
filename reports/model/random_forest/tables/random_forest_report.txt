@@ -1,0 +1,16 @@
+Random Forest Baseline Report
+============================================================
+Accuracy: 0.956370
+Balanced Accuracy: 0.953654
+Macro F1: 0.942153
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      GALAXY       0.98      0.96      0.97     75496
+         QSO       0.95      0.97      0.96     23429
+        STAR       0.86      0.94      0.90     16545
+
+    accuracy                           0.96    115470
+   macro avg       0.93      0.95      0.94    115470
+weighted avg       0.96      0.96      0.96    115470
