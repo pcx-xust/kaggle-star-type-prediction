@@ -1,0 +1,16 @@
+RandomForest Color Feature Report
+============================================================
+Accuracy: 0.959470
+Balanced Accuracy: 0.942999
+Macro F1: 0.944721
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      GALAXY   0.969874  0.973111  0.971490     75496
+         QSO   0.961867  0.961415  0.961641     23429
+        STAR   0.907691  0.894470  0.901032     16545
+
+    accuracy                       0.959470    115470
+   macro avg   0.946477  0.942999  0.944721    115470
+weighted avg   0.959339  0.959470  0.959396    115470

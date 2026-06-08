@@ -1,0 +1,16 @@
+ExtraTrees Color Feature Report
+============================================================
+Accuracy: 0.954949
+Balanced Accuracy: 0.930951
+Macro F1: 0.936589
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      GALAXY   0.964555  0.974674  0.969588     75496
+         QSO   0.953614  0.959068  0.956333     23429
+        STAR   0.910045  0.859112  0.883845     16545
+
+    accuracy                       0.954949    115470
+   macro avg   0.942738  0.930951  0.936589    115470
+weighted avg   0.954525  0.954949  0.954613    115470
