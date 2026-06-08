@@ -1,0 +1,2 @@
+model,accuracy,balanced_accuracy,macro_f1,best_iteration
+LightGBM_color,0.9675153719580843,0.9549006209291945,0.9563502115146476,2000
