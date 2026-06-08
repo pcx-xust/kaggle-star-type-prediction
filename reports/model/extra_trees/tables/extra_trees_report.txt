@@ -1,0 +1,16 @@
+ExtraTrees Baseline Report
+============================================================
+Accuracy: 0.956188
+Balanced Accuracy: 0.932845
+Macro F1: 0.938546
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      GALAXY       0.96      0.98      0.97     75496
+         QSO       0.96      0.96      0.96     23429
+        STAR       0.91      0.87      0.89     16545
+
+    accuracy                           0.96    115470
+   macro avg       0.94      0.93      0.94    115470
+weighted avg       0.96      0.96      0.96    115470

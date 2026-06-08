@@ -1,0 +1,2 @@
+﻿model,accuracy,balanced_accuracy,macro_f1
+ExtraTrees_baseline,0.956187754395081,0.9328445756265992,0.9385457634890549
