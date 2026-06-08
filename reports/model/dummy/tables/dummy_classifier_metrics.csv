@@ -1,0 +1,2 @@
+﻿model,accuracy,balanced_accuracy,macro_f1
+DummyClassifier_most_frequent,0.6538148436823418,0.3333333333333333,0.2635582599345782

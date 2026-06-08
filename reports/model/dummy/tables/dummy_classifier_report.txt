@@ -1,0 +1,17 @@
+Dummy Classifier Baseline Report
+============================================================
+Strategy: most_frequent
+Accuracy: 0.653815
+Balanced Accuracy: 0.333333
+Macro F1: 0.263558
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      GALAXY       0.65      1.00      0.79     75496
+         QSO       0.00      0.00      0.00     23429
+        STAR       0.00      0.00      0.00     16545
+
+    accuracy                           0.65    115470
+   macro avg       0.22      0.33      0.26    115470
+weighted avg       0.43      0.65      0.52    115470
