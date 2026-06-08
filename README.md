@@ -22,20 +22,43 @@ Raw data is not included in this repository. Please download it from Kaggle usin
 
 ## Project Structure
 
-```text
 kaggle-star-type-prediction/
-├─ data/
-│  ├─ raw/
-│  ├─ processed/
-│  └─ submissions/
-├─ src/
-│  ├─ download_data.py
-│  ├─ train.py
-│  └─ predict.py
-├─ models/
-├─ reports/
-│  ├─ figures/
-│  └─ model_report.md
-├─ README.md
-├─ requirements.txt
-└─ .gitignore
+├── data/
+│   ├── raw/                    # Raw Kaggle data files, ignored by Git
+│   └── processed/              # Processed data files, ignored by Git
+│
+├── notebook/
+│   ├── 01_eda.ipynb
+│   ├── 02_baseline_model.ipynb
+│   ├── 03_color_feature_model.ipynb
+│   ├── 04_model_selection.ipynb
+│   ├── 05_submission.ipynb
+│   ├── 06_lgbm_model.ipynb
+│   └── 07_lgbm_cv_tuning.ipynb
+│
+├── reports/
+│   ├── eda/                    # EDA reports, figures, and summary tables
+│   └── model/
+│       ├── baseline/           # Dummy, RandomForest, and ExtraTrees results
+│       ├── color_features/     # Color feature engineering results
+│       ├── lgbm/               # LightGBM validation results
+│       ├── lgbm_cv_tuning/     # LightGBM cross-validation tuning results
+│       └── final_selection/    # Final model selection report
+│
+├── src/
+│   ├── download_data.py
+│   ├── train.py
+│   └── predict.py
+│
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
+
+Notes:
+
+* Raw Kaggle data files are stored locally under `data/raw/` and are not uploaded to GitHub.
+* Trained model binaries and Kaggle submission CSV files are generated locally and are excluded by `.gitignore`.
+* The final selected model is LightGBM with color index features, achieving a Kaggle Public Score of `0.95719`.
+
