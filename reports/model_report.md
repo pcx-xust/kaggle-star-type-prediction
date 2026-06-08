@@ -1,33 +1,17 @@
-# 模型评估报告
+# Final Model Selection Report
 
-## 1.DummyClassifier基准模型
+## 1. Overall Model Comparison
 
-DummyClassifier采用`most_frequent`策略，即始终预测训练集中占比最高的类别GALAXY。验证集结果显示，该模型的accuracy为0.653815，balanced accuracy为0.333333，macro F1-score为0.263558。
+本阶段将基线建模阶段和颜色指数特征工程阶段的模型结果进行统一比较。参与比较的模型包括DummyClassifier、基线RandomForest、基线ExtraTrees、加入颜色指数特征后的RandomForest以及加入颜色指数特征后的ExtraTrees。比较指标包括Accuracy、Balanced Accuracy和Macro F1。
 
-从混淆矩阵可以看出，DummyClassifier将所有验证集样本都预测为GALAXY，因此GALAXY类别的recall为1.00，而QSO和STAR的recall均为0。这说明在类别不均衡数据中，accuracy会受到多数类GALAXY的显著影响，不能单独作为模型优劣的判断依据。
+从总比较结果看，RandomForest+颜色指数特征在Accuracy和Macro F1上取得最高结果，分别为0.959470和0.944721，说明加入颜色指数特征后，模型整体分类准确率和宏平均F1略有提升。相比之下，原始RandomForest模型的Balanced Accuracy为0.953654，高于RandomForest+颜色指数特征的0.942999，说明原始RandomForest在三类样本召回率的均衡性上更优。
 
-因此，后续正式模型必须重点关注balanced accuracy、macro F1-score以及QSO、STAR两个少数类的recall和F1-score，而不仅仅追求accuracy提升。
+## 2. Model Selection
 
-## 2.RandomForest Baseline
+综合当前结果，本文暂时选择RandomForest+颜色指数特征作为后续Kaggle提交的候选模型。选择该模型的主要原因是：其在所有候选模型中取得最高Accuracy和Macro F1，说明该模型在整体分类效果和宏平均分类表现上具有一定优势。同时，颜色指数特征具有明确的天文学含义，能够反映相邻光度波段之间的星等差异，相比单独使用u、g、r、i、z等原始星等特征，具有更强的物理解释基础。
 
-RandomForestClassifier作为第一个正式Baseline模型，在验证集上取得了明显优于DummyClassifier的结果。模型accuracy为0.956370，balanced accuracy为0.953654，macro F1-score为0.942153，说明模型不仅提升了整体准确率，也能够较好地识别不同类别样本。
+不过，该模型并不是在所有指标上全面最优。与原始RandomForest相比，RandomForest+颜色指数特征的Balanced Accuracy有所下降，说明加入颜色指数后，模型对三类样本的召回均衡性没有进一步改善。因此，后续若更关注STAR类别的稳定识别或类别均衡性能，原始RandomForest仍然是一个有竞争力的候选模型。
 
-从分类报告看，GALAXY的precision、recall和F1-score分别为0.98、0.96和0.97；QSO分别为0.95、0.97和0.96；STAR分别为0.86、0.94和0.90。相比DummyClassifier仅能预测多数类GALAXY，RandomForest已经能够有效识别QSO和STAR两个非多数类。
+## 3. Current Decision
 
-不过，STAR类别的precision为0.86，低于GALAXY和QSO，说明模型仍会将部分非STAR样本误判为STAR。后续模型优化应重点关注STAR类别的误判来源，并通过特征工程、模型对比或参数调整进一步改善少数类分类质量。
-
-综合来看，RandomForest Baseline已经建立了一个较强的基准模型。后续需要进一步提取特征重要性，验证EDA阶段关于redshift和光度变量重要性的判断，并与ExtraTrees等模型进行对比。
-
-### 3.ExtraTrees
-
-为进一步检验集成树模型在恒星类型预测任务中的适用性，本文在随机森林模型的基础上引入ExtraTreesClassifier进行对比实验。ExtraTrees模型同样基于训练集划分得到的验证集进行评估，因此本节结果反映的是模型在验证集上的泛化表现，并不是Kaggle测试集得分。
-
-从整体评价指标来看，ExtraTrees模型在验证集上的Accuracy为0.956188，Balanced Accuracy为0.932845，Macro F1为0.938546。相比DummyClassifier基准模型，ExtraTrees显著提升了三类天体的整体识别能力，说明基于多棵极端随机树的非线性集成方法能够较好地刻画光度特征、红移特征、光谱类型特征与天体类别之间的复杂关系。
-
-从分类别结果看，ExtraTrees对GALAXY和QSO的识别效果较稳定。其中，GALAXY类别的precision、recall和F1-score分别为0.96、0.98和0.97；QSO类别的precision、recall和F1-score均约为0.96，说明模型对这两类样本具有较高的区分能力。相比之下，STAR类别的precision为0.91，recall为0.87，F1-score为0.89，是三类中表现最弱的一类。这表明ExtraTrees虽然具有较强的整体分类能力，但对STAR样本的召回仍存在一定不足。
-
-混淆矩阵进一步揭示了模型的主要误差来源。真实GALAXY样本中有73675个被正确识别，误分为QSO和STAR的样本数分别为782和1039；真实QSO样本中有22395个被正确识别，误分为GALAXY和STAR的样本数分别为649和385；真实STAR样本中有14341个被正确识别，但有2037个被误判为GALAXY，另有167个被误判为QSO。由此可见，ExtraTrees的主要误差集中在STAR与GALAXY之间，尤其是部分真实STAR样本容易被模型划入GALAXY类别。
-
-从特征重要性结果看，redshift仍然是ExtraTrees模型中最重要的特征，说明红移信息对区分不同天体类别具有较强的判别作用。除redshift外，spectral_type_M、g、z、r、u、i等光度和光谱相关变量也具有较高的重要性，表明模型不仅依赖单一红移变量，也综合利用了多波段光度信息和光谱类型信息。需要注意的是，树模型中的特征重要性反映的是模型内部的相对分裂贡献，并不能直接解释为变量对天体类别的因果影响。
-
-综合来看，ExtraTrees模型能够在当前特征体系下取得较高的整体分类精度，是一个有效的非线性集成学习基线模型。但与RandomForest相比，ExtraTrees的Balanced Accuracy和Macro F1略低，尤其在STAR类别上的召回率偏低。因此，后续建模不宜仅依据Accuracy判断模型优劣，而应重点比较Balanced Accuracy、Macro F1以及STAR类别的识别效果。下一步可在现有特征基础上构造颜色指数特征u_g、g_r、r_i和i_z，并重新训练RandomForest与ExtraTrees，以检验颜色特征是否能够改善STAR与GALAXY之间的混淆问题。
+基于当前验证集结果，后续提交阶段优先采用RandomForest+颜色指数特征模型。该模型将在完整train.csv上重新训练，并对test.csv生成预测结果，最终输出submission.csv用于Kaggle提交。

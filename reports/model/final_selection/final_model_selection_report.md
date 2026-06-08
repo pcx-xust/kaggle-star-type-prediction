@@ -1,0 +1,3 @@
+从总模型比较结果看，RandomForest+颜色指数特征在Accuracy和Macro F1上取得最高结果，分别为0.959470和0.944721，说明加入颜色指数特征后，模型整体分类性能和宏平均F1略有提升。然而，原始RandomForest模型的Balanced Accuracy为0.953654，高于RandomForest+颜色指数特征的0.942999，表明原始RandomForest在三类样本召回率的均衡性上更优。
+
+因此，颜色指数特征工程带来了一定的整体性能增益，但并未全面提升模型表现。若以后续Kaggle提交的整体预测准确率为主要目标，可将RandomForest+颜色指数特征作为当前候选模型；若更重视类别均衡识别能力，尤其是STAR类别的稳定识别，则原始RandomForest仍然具有竞争力。
