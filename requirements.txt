@@ -6,3 +6,4 @@ seaborn
 kagglehub
 jupyter
 joblib
+openpyxl
